@@ -1,5 +1,7 @@
-class Result
+# frozen_string_literal: true
 
+# Class that holds result of log analysis
+class Result
   attr_reader :counters
 
   def initialize
@@ -13,5 +15,4 @@ class Result
   def unique_increment
     @counters[:unique_hits] += 1
   end
-
 end

@@ -1,5 +1,7 @@
-class Line
+# frozen_string_literal: true
 
+# Model that represents line in log
+class Line
   attr_reader :path, :ip
 
   def initialize(path:, ip:)
@@ -7,19 +9,18 @@ class Line
     @ip = ip
   end
 
-	def valid? 
-		!!@path && !!@ip
-	end
+  def valid?
+    !@path.nil? && !@ip.nil?
+  end
 
-	def ==(other)
-		self.path == other.path &&
-		self.ip == other.ip
-	end
+  def ==(other)
+    path == other.path &&
+      ip == other.ip
+  end
 
-	alias eql? ==
+  alias eql? ==
 
-	def hash
-		[self.path, self.ip].hash
-	end
-
+  def hash
+    [path, ip].hash
+  end
 end
