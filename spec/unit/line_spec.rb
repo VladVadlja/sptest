@@ -94,4 +94,14 @@ RSpec.describe Line do
       expect(subject.hash).to eq(other.hash)
     end
   end
+
+  describe '#to_sym' do
+    it 'has to_sym method' do
+      expect(subject).to respond_to(:to_sym)
+    end
+
+    it 'returns symbol representation of path' do
+      expect(subject.to_sym).to eq(subject.path.to_sym)
+    end
+  end
 end

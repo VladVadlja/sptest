@@ -23,4 +23,8 @@ class Line
   def hash
     [path, ip].hash
   end
+
+  def to_sym
+    path.to_sym
+  end
 end
