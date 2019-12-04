@@ -3,7 +3,6 @@
 require 'set'
 require 'result'
 
-# Class represents Parser that parsers lines
 class Parser
   attr_reader :results
 
@@ -37,10 +36,10 @@ class Parser
   end
 
   def add_unique(line)
-    unless @unique_lines.include? line
-      @unique_lines << line
-      create_result(line)
-      @results[line.to_sym].unique_increment
-    end
+    return if @unique_lines.include? line
+
+    @unique_lines << line
+    create_result(line)
+    @results[line.to_sym].unique_increment
   end
 end

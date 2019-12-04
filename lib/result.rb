@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Class that holds result of log analysis
 class Result
   attr_reader :counters
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Model that represents line in log
 class Line
   attr_reader :path, :ip
 
