@@ -5,7 +5,7 @@ log analyzer
 `$ bundle install`
 
 ## Run
-`$ ./ruby_app.rb webserver.log
+`$ ./ruby_app.rb webserver.log`
 
 or
 
