@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class Analyzer
-  attr_reader :filename, :parser
+  attr_reader :filename, :data_store, :output
 
-  def initialize(filename:, parser: Parser.new)
+  def initialize(filename:, data_store: DataStore.new, output: TerminalOutput.new)
     @filename = filename
-    @parser = parser
+    @data_store = data_store
+    @output = output
   end
 
   def start
@@ -14,44 +15,12 @@ class Analyzer
     File.foreach(filename) do |file_line|
       line_array = file_line.split
       line = Line.new(path: line_array[0], ip: line_array[1])
-      parser.parse(line)
+      data_store.load(line)
     end
 
-    show_analytics
+    output.data_store = data_store.results
+    output.show_analytics
   rescue FileNotFoundError
     puts "File #{filename} not found!"
-  end
-
-  private
-
-  def show_analytics
-    show_page_hits
-    show_page_unique_hits
-  end
-
-  def show_page_hits
-    puts 'Most visited pages:'
-    print_hits
-    puts
-  end
-
-  def show_page_unique_hits
-    puts 'Pages with most unique visits:'
-    print_unique_hits
-    puts
-  end
-
-  def print_hits
-    ordered = parser.results.sort_by { |_path, result| result.counters[:hits] }.reverse
-    ordered.each do |path, result|
-      puts "#{path} #{result.counters[:hits]} visits"
-    end
-  end
-
-  def print_unique_hits
-    ordered = parser.results.sort_by { |_path, result| result.counters[:unique_hits] }.reverse
-    ordered.each do |path, result|
-      puts "#{path} #{result.counters[:unique_hits]} views"
-    end
   end
 end

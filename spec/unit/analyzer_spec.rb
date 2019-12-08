@@ -16,7 +16,7 @@ RSpec.describe Analyzer do
     end
 
     it '#parser' do
-      expect(subject.parser).not_to be_nil
+      expect(subject.data_store).not_to be_nil
     end
   end
 
