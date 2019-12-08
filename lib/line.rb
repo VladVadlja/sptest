@@ -9,7 +9,7 @@ class Line
   end
 
   def valid?
-    !@path.nil? && !@ip.nil?
+    !path.nil? && !ip.nil?
   end
 
   def ==(other)

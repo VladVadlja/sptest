@@ -32,7 +32,7 @@ RSpec.describe Parser do
   describe 'line parsing' do
     it 'has result' do
       subject.add_line(line)
-      expect(subject.result(line)).to be_kind_of(Result)
+      expect(subject.result(line)).to be_kind_of(DataStore)
     end
 
     context 'parse same line twice' do

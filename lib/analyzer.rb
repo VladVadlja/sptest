@@ -9,17 +9,17 @@ class Analyzer
   end
 
   def start
-    raise FileNotFoundError if @filename.nil? || !File.exist?(@filename)
+    raise FileNotFoundError if filename.nil? || !File.exist?(filename)
 
-    File.foreach(@filename) do |file_line|
+    File.foreach(filename) do |file_line|
       line_array = file_line.split
       line = Line.new(path: line_array[0], ip: line_array[1])
-      @parser.parse(line)
+      parser.parse(line)
     end
 
     show_analytics
   rescue FileNotFoundError
-    puts "File #{@filename} not found!"
+    puts "File #{filename} not found!"
   end
 
   private
@@ -42,14 +42,14 @@ class Analyzer
   end
 
   def print_hits
-    ordered = @parser.results.sort_by { |_path, result| result.counters[:hits] }.reverse
+    ordered = parser.results.sort_by { |_path, result| result.counters[:hits] }.reverse
     ordered.each do |path, result|
       puts "#{path} #{result.counters[:hits]} visits"
     end
   end
 
   def print_unique_hits
-    ordered = @parser.results.sort_by { |_path, result| result.counters[:unique_hits] }.reverse
+    ordered = parser.results.sort_by { |_path, result| result.counters[:unique_hits] }.reverse
     ordered.each do |path, result|
       puts "#{path} #{result.counters[:unique_hits]} views"
     end

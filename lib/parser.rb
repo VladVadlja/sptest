@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'set'
-require 'result'
+require 'data_store'
 
 class Parser
-  attr_reader :results
+  attr_reader :results, :unique_lines
 
   def initialize(results: {}, unique_lines: Set.new)
     @results = results
@@ -16,7 +16,7 @@ class Parser
   end
 
   def result(line)
-    @results[line.to_sym]
+    results[line.to_sym]
   end
 
   def add_line(line)
@@ -28,18 +28,18 @@ class Parser
 
   def add_visit(line)
     create_result(line)
-    @results[line.to_sym].hits_increment
+    results[line.to_sym].hits_increment
   end
 
   def create_result(line)
-    @results[line.to_sym] ||= Result.new
+    results[line.to_sym] ||= DataStore.new
   end
 
   def add_unique(line)
-    return if @unique_lines.include? line
+    return if unique_lines.include? line
 
-    @unique_lines << line
+    unique_lines << line
     create_result(line)
-    @results[line.to_sym].unique_increment
+    results[line.to_sym].unique_increment
   end
 end

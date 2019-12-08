@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'result'
+require 'data_store'
 
-RSpec.describe Result do
+RSpec.describe DataStore do
   subject { described_class.new }
 
   describe 'initialization' do

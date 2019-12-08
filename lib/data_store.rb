@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Result
+class DataStore
   attr_reader :counters
 
   def initialize
@@ -8,10 +8,10 @@ class Result
   end
 
   def hits_increment
-    @counters[:hits] += 1
+    counters[:hits] += 1
   end
 
   def unique_increment
-    @counters[:unique_hits] += 1
+    counters[:unique_hits] += 1
   end
 end
