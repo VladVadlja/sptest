@@ -31,6 +31,28 @@ i.e.:
 ## Output
 Data will be sorted by number of visits or unique hits in descending order:
 
-`
+```
+Most visited pages:
++--------------+-----------+
+| Path         | # of hits |
++--------------+-----------+
+| /about/2     | 90        |
+| /contact     | 89        |
+| /index       | 82        |
+| /about       | 81        |
+| /help_page/1 | 80        |
+| /home        | 78        |
++--------------+-----------+
 
-`
+Pages with most unique visits:
++--------------+---------------+
+| Path         | # unique hits |
++--------------+---------------+
+| /index       | 23            |
+| /home        | 23            |
+| /contact     | 23            |
+| /help_page/1 | 23            |
+| /about/2     | 22            |
+| /about       | 21            |
++--------------+---------------+
+```
