@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'terminal-table'
+
 class TerminalOutput
   attr_accessor :data_store
 
@@ -27,16 +29,22 @@ class TerminalOutput
   end
 
   def print_hits
+    rows = []
     ordered = data_store.sort_by { |_path, result| result.counters[:hits] }.reverse
     ordered.each do |path, result|
-      puts "#{path} #{result.counters[:hits]} visits"
+      rows << ["#{path}", "#{result.counters[:hits]}"]
     end
+    table = Terminal::Table.new :headings => ['Path', '# of hits'], :rows => rows
+    puts table
   end
 
   def print_unique_hits
+    rows = []
     ordered = data_store.sort_by { |_path, result| result.counters[:unique_hits] }.reverse
     ordered.each do |path, result|
-      puts "#{path} #{result.counters[:unique_hits]} views"
+      rows << ["#{path}", "#{result.counters[:unique_hits]}"]
     end
+    table = Terminal::Table.new :headings => ['Path', '# unique hits'], :rows => rows
+    puts table
   end
 end

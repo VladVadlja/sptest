@@ -23,11 +23,22 @@ RSpec.describe TerminalOutput do
       store.load(line)
       subject.data_store = store.results
       expect { subject.show_analytics }.to output(
-        "Most visited pages:\n"\
-        "/about 2 visits\n"\
-        "\n"\
-        "Pages with most unique visits:\n"\
-        "/about 1 views\n\n"
+        <<~END
+          Most visited pages:
+          +--------+-----------+
+          | Path   | # of hits |
+          +--------+-----------+
+          | /about | 2         |
+          +--------+-----------+
+
+          Pages with most unique visits:
+          +--------+---------------+
+          | Path   | # unique hits |
+          +--------+---------------+
+          | /about | 1             |
+          +--------+---------------+
+
+        END
       ).to_stdout
     end
   end
